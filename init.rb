@@ -2,7 +2,9 @@
 
 require 'redmine'
 
-require 'redmine_default_members'
+Rails.configuration.to_prepare do
+  require 'redmine_default_members'
+end
 
 Redmine::Plugin.register :redmine_default_members do
   name 'Redmine Default Members'
