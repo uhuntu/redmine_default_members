@@ -22,7 +22,12 @@ module RedmineDefaultMembers
           if self.name == 'plugin_redmine_default_members'
             valuehash = self.value
             valuehash.each do |key, default_member|
-              valuehash[key][:roles] = valuehash[key][:roles].select{ |r| !r.empty? }
+              roles = valuehash[key][:roles]
+              if !roles.nil?
+                valuehash[key][:roles] = roles.select{ |r| !r.empty? }
+              else
+                valuehash[key][:roles] = []
+              end
             end
             self.value = valuehash
             Setting.check_cache
